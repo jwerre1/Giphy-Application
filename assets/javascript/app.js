@@ -1,10 +1,10 @@
-var tvShows = ["The Office", "Parks and Recreation", "New Girl", "South Park", "Bob's Burgers", "Crazy Ex-Girlfriend", "The Good Place", "Seinfeld", "Friends", "Sex And The City", "The Big Bang Theory", "The Goldbergs", "Community", "Rick and Morty", "Adventure Time", "Archer", "Arrested Development"];
+var tvShows = ["The Office", "Parks and Recreation", "New Girl", "South Park", "Bob's Burgers", "Crazy Ex-Girlfriend", "The Good Place", "Seinfeld", "Friends", "It's Always Sunny In Philadelphia", "The Big Bang Theory", "The Goldbergs", "Community", "Rick and Morty", "Adventure Time", "Archer", "Arrested Development"];
 
 
 function displayGifs() {
     $("#gifs-view").empty();
     var tvGif = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + tvGif + "&api_key=UC1ZPXs6ERCkzy8RRSMRQTEGuv0FMQhf&limit=5";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + tvGif + "&api_key=UC1ZPXs6ERCkzy8RRSMRQTEGuv0FMQhf&limit=10";
     console.log(tvGif);
 
     $.ajax({
@@ -15,7 +15,7 @@ function displayGifs() {
 
         var gifDiv = $("<div>");
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 10; i++) {
 
             var rating = response.data[i].rating;
             var gRating = $("<p>");
@@ -23,7 +23,7 @@ function displayGifs() {
             gifDiv.append(gRating);
 
             var gGif = $("<img>");
-            gGif.attr("src", response.data[i].images.downsized.url);
+            gGif.attr("src", response.data[i].images.fixed_height.url);
             gifDiv.append(gGif);
 
         }
