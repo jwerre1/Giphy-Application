@@ -30,8 +30,12 @@ function displayGifs() {
             gifDiv.append(gRating);
 
             var gGif = $("<img>");
-            gGif.attr("src", response.data[i].images.fixed_height.url);
-            gGif.attr("alt", tvGif + " Gif " + (i+1))
+            gGif.attr("src", response.data[i].images.fixed_height_still.url);
+            gGif.attr("data-still", response.data[i].images.fixed_height_still.url);
+            gGif.attr("data-animate", response.data[i].images.fixed_height.url);
+            gGif.attr("data-state", "still");
+            gGif.attr("alt", tvGif + " Gif " + (i+1));
+            gGif.addClass("gif");
             gifDiv.append(gGif);
 
         }
@@ -66,8 +70,12 @@ function displayEmptyGifs() {
             gifDiv.append(gRating);
 
             var gGif = $("<img>");
-            gGif.attr("src", response.data[i].images.fixed_height.url);
-            gGif.attr("alt", tvGif + " Gif " + (i+1))
+            gGif.attr("src", response.data[i].images.fixed_height_still.url);
+            gGif.attr("data-still", response.data[i].images.fixed_height_still.url);
+            gGif.attr("data-animate", response.data[i].images.fixed_height.url);
+            gGif.attr("data-state", "still");
+            gGif.attr("alt", tvGif + " Gif " + (i+1));
+            gGif.addClass("gif");
             gifDiv.append(gGif);
 
         }
@@ -98,7 +106,6 @@ function genButtons() {
 
     var b = $("<button>");
     b.addClass("clear btn btn-danger m-1");
-    // a.attr("data-name", tvShows[i]);
     b.text("Clear");
     $("#buttons-view").append(b);
 };
@@ -120,6 +127,22 @@ $("#change-numbers").on("click", function(event){
     displayEmptyGifs();
 
 });
+
+$(document).on("click", ".gif", function() {
+    var state = $(this).attr("data-state");
+    console.log("Look!" + this);
+
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    }
+
+    else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+
+})
 
 $(document).on("click", ".tv", displayGifs);
 
