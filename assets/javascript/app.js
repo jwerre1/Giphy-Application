@@ -1,6 +1,6 @@
 $(document).ready(function() {  
 
-var tvShows = ["The Office", "Parks and Recreation", "New Girl", "South Park", "Bob's Burgers", "Crazy Ex-Girlfriend", "The Good Place", "Seinfeld", "Friends", "It's Always Sunny In Philadelphia", "The Big Bang Theory", "The Goldbergs", "Community", "Rick and Morty", "Adventure Time", "Archer", "Arrested Development"];
+var tvShows = ["The Office", "Parks and Recreation", "New Girl", "South Park", "Bob's Burgers", "Crazy Ex-Girlfriend", "The Good Place", "Seinfeld", "Friends", "It's Always Sunny In Philadelphia", "The Big Bang Theory", "30 Rock", "Community", "Rick and Morty", "Adventure Time", "Archer", "Arrested Development"];
 
 var number = 10;
 
@@ -21,13 +21,17 @@ function displayGifs() {
         console.log(response);
 
         var gifDiv = $("<div>");
+        gifDiv.addClass("gifs-wrap")
 
         for (i = 0; i < number; i++) {
 
+        var containingDiv = $("<div>")
+        containingDiv.addClass("mx-2 mb-4")
+
             var rating = response.data[i].rating;
-            var gRating = $("<p>");
+            var gRating = $("<div>");
             gRating.text("Rating: " + rating);
-            gifDiv.append(gRating);
+            containingDiv.append(gRating);
 
             var gGif = $("<img>");
             gGif.attr("src", response.data[i].images.fixed_height_still.url);
@@ -36,7 +40,9 @@ function displayGifs() {
             gGif.attr("data-state", "still");
             gGif.attr("alt", tvGif + " Gif " + (i+1));
             gGif.addClass("gif");
-            gifDiv.append(gGif);
+            containingDiv.append(gGif);
+
+            gifDiv.append(containingDiv);
 
         }
 
@@ -61,13 +67,17 @@ function displayEmptyGifs() {
         console.log(response);
 
         var gifDiv = $("<div>");
+        gifDiv.addClass("gifs-wrap")
 
         for (i = 0; i < number; i++) {
 
+        var containingDiv = $("<div>")
+        containingDiv.addClass("mx-2 mb-4")
+
             var rating = response.data[i].rating;
-            var gRating = $("<p>");
+            var gRating = $("<div>");
             gRating.text("Rating: " + rating);
-            gifDiv.append(gRating);
+            containingDiv.append(gRating);
 
             var gGif = $("<img>");
             gGif.attr("src", response.data[i].images.fixed_height_still.url);
@@ -76,7 +86,10 @@ function displayEmptyGifs() {
             gGif.attr("data-state", "still");
             gGif.attr("alt", tvGif + " Gif " + (i+1));
             gGif.addClass("gif");
-            gifDiv.append(gGif);
+            containingDiv.append(gGif);
+
+            gifDiv.append(containingDiv);
+
 
         }
 
@@ -124,7 +137,17 @@ $("#change-numbers").on("click", function(event){
     event.preventDefault();
     number = $("#how-many-input").val();
 
-    displayEmptyGifs();
+    if (number < 26) {
+        displayEmptyGifs();
+    }
+
+    // prevents nothing showing-up if user selects more than 25 gifs
+    else {
+        number = 25;
+        displayEmptyGifs();
+    }
+
+    
 
 });
 

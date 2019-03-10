@@ -1,9 +1,8 @@
-.container {
-   width: 100%;
-   padding: 0px;
-   margin: 0px;
+img {
+    height: 160px;
 }
 
-img {
-    height: 150px;
+.gifs-wrap {
+    display: flex;
+    flex-wrap: wrap;
 }
