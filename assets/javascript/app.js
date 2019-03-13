@@ -6,6 +6,7 @@ var number = 10;
 
 var tvGifNumber = "";
 
+//displays gifs when a tv show button is pushed
 function displayGifs() {
     $("#gifs-view").empty();
     var tvGif = $(this).attr("data-name");
@@ -52,6 +53,7 @@ function displayGifs() {
 
 };
 
+// displays gifs when the number of gifs is modified
 function displayEmptyGifs() {
     $("#gifs-view").empty();
     var tvGif = tvGifNumber;
@@ -99,7 +101,7 @@ function displayEmptyGifs() {
 
 };
 
-
+//clears the gifs when the "clear" button is pressed
 function empty() {
     $("#gifs-view").empty();
 };
@@ -123,6 +125,7 @@ function genButtons() {
     $("#buttons-view").append(b);
 };
 
+//adds a tv show button
 $("#add-tv").on("click", function(event){
     event.preventDefault();
     var tv = $("#tv-input").val().trim();
@@ -133,6 +136,7 @@ $("#add-tv").on("click", function(event){
 
 });
 
+//changes the number of gifs displayed
 $("#change-numbers").on("click", function(event){
     event.preventDefault();
     number = $("#how-many-input").val();
@@ -151,6 +155,7 @@ $("#change-numbers").on("click", function(event){
 
 });
 
+//changes the gifs from still to active, and vice versa
 $(document).on("click", ".gif", function() {
     var state = $(this).attr("data-state");
     console.log("Look!" + this);
@@ -166,6 +171,7 @@ $(document).on("click", ".gif", function() {
     }
 
 })
+
 
 $(document).on("click", ".tv", displayGifs);
 
